@@ -1,5 +1,8 @@
 from flask_mqtt import Mqtt
 
+topic = ""
+payload = ""
+
 mqtt = Mqtt()
 
 @mqtt.on_connect()
@@ -22,6 +25,8 @@ def handle_logging(client, userdata, level, buf):
 
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
-    topic=message.topic
-    payload=message.payload.decode()
-    print(payload)
+    global topic
+    global payload
+
+    topic = message.topic
+    payload = message.payload.decode()
